@@ -17,7 +17,7 @@ class Request {
 
     private function __construct($server, $pars) {
         //$_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']
-        $this->uri = trim(explode('?', $server['REQUEST_URI'])[0], '/\\');
+        $this->uri = trim(parse_url($server['REQUEST_URI'])['path'], '/\\');
         $this->parameters = $pars;
         $this->method = $server['REQUEST_METHOD'];
     }

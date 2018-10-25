@@ -14,12 +14,26 @@ use Core\Exceptions\RouterException;
 class Router {
 
     private $routes;
+    private static $instance;
 
-    public function __construct() {
-        $routes = require '../routes/web.php';
-        $this->routes = array_map(function ($item) {
-            return array_map([$this, 'UriTrim'], $item);
-        }, $routes);
+    public function __construct(array $_routesMock = null) {
+        if ($_routesMock) {
+            $this->routes = $_routesMock;
+        }
+        else {
+            //$router = $this;
+            $routes = require '../routes/web.php';
+            $this->routes = array_map(function ($item) {
+                return array_map([$this, 'UriTrim'], $item);
+            }, $routes);
+        }
+    }
+
+    public function GetInstance(array $_routesMock = null) {
+        if (!self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 
     public function Proceed(Request $request) {
@@ -34,6 +48,7 @@ class Router {
         }
 
         $action = $this->routes[$method][$uri];
+
         $actionArr = explode('@', $action);
         if (\count($actionArr) !== 2) {
             throw new Exceptions\RouterException("Error in route $action");
@@ -51,5 +66,14 @@ class Router {
     private function UriTrim($uri) {
         return trim($uri, '/\\');
     }
+
+    public function Get($route, $action) {
+        $this->routes['GET'][$this->UriTrim($route)] = $action;
+    }
+
+    public function Post($route, $action) {
+        $this->routes['POST'][$this->UriTrim($route)] = $action;
+    }
+
 
 }

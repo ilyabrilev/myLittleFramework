@@ -21,6 +21,6 @@ function env($key, $default = '', $isVital = false) {
 
 function view(string $view, array $options = []) {
     extract($options, EXTR_OVERWRITE);
-    return require "../public/views/$view.view.php";
+    return require "public/views/$view.view.php";
 }
 
