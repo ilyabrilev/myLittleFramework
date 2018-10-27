@@ -19,6 +19,7 @@ class Index {
     }
 
     public function GetAnother(Request $request) {
+        throw new \Exception('test');
         return new View('second', ['p1' => 'Called from Index controller; Method GetAnother', 'p2' => json_encode($request->Parameters())]);
     }
 

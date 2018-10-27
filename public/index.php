@@ -14,8 +14,16 @@ require '../app/Models/User.php';
 */
 
 $router = new \Core\Router();
-$result = $router->Proceed(\Core\Request::Get());
-\Core\Responses\ResponseHandler::Render($result);
+$request = \Core\Request::Get();
+$errorHandler = new \Core\ErrorHandler();
+try {
+    $result = $router->Proceed(\Core\Request::Get());
+    \Core\Responses\ResponseHandler::Render($result);
+}
+catch (\Exception $ex) {
+    $errorHandler->Handle($ex, $request);
+}
+
 
 //return $result;
 

@@ -9,6 +9,7 @@ return array(
     'Core\\Configuration' => $baseDir . '/core/Configuration.php',
     'Core\\DBConnection' => $baseDir . '/core/DBConnection.php',
     'Core\\Environment' => $baseDir . '/core/Environment.php',
+    'Core\\ErrorHandler' => $baseDir . '/core/ErrorHandler.php',
     'Core\\Exceptions\\ConfigurationException' => $baseDir . '/core/Exceptions/ConfigurationException.php',
     'Core\\Exceptions\\EnvIsEmptyException' => $baseDir . '/core/Exceptions/EnvIsEmptyException.php',
     'Core\\Exceptions\\EnvParseException' => $baseDir . '/core/Exceptions/EnvParseException.php',
@@ -21,4 +22,5 @@ return array(
     'Core\\Responses\\View' => $baseDir . '/core/Responses/View.php',
     'Core\\Router' => $baseDir . '/core/Router.php',
     'EnvException' => $baseDir . '/core/Exceptions/EnvException.php',
+    'ResponseException' => $baseDir . '/core/Exceptions/ResponseException.php',
 );

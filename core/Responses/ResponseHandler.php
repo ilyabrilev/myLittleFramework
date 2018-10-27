@@ -29,4 +29,11 @@ class ResponseHandler {
         }
         return new View('404', ['text' => $text], 404);
     }
+
+    public static function Page500($ex, Request $request) {
+        if ($request->IsAccepting('application/json')) {
+            return new Json(['err' => 'Page not found', 'ex' => $ex], 500);
+        }
+        return new View('500', ['ex' => $ex], 500);
+    }
 }
