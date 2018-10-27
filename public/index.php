@@ -14,7 +14,10 @@ require '../app/Models/User.php';
 */
 
 $router = new \Core\Router();
-return $router->Proceed(\Core\Request::Get());
+$result = $router->Proceed(\Core\Request::Get());
+\Core\Responses\ResponseHandler::Render($result);
+
+//return $result;
 
 //echo \Utilities\Environment::Get('CONNECTION_HOST_TYPE');
 

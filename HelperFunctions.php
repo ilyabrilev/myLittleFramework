@@ -6,6 +6,7 @@
  * Time: 16:00
  */
 function jdd($obj) {
+    header('content-type: application/json');
     echo json_encode($obj);
     die;
 }

@@ -8,10 +8,16 @@
 
 namespace App\Controllers;
 
+use Core\Responses\Json;
+use Core\Responses\View;
+
 class Second {
 
     public function Get() {
-        return view('second', ['p1' => 'Called from Second controller', 'p2' => 'Method Get']);
+        return new View('second', ['p1' => 'Called from Second controller', 'p2' => 'Method Get']);
     }
 
+    public function GetJson() {
+        return new Json(['p1' => 'Called from Second controller', 'p2' => 'Method Get']);
+    }
 }

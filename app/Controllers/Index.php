@@ -9,15 +9,17 @@
 namespace App\Controllers;
 
 use Core\Request;
+use Core\Responses\View;
 
 class Index {
 
     public function Get() {
-        return view('main');
+        return new View('main');
+        //return view('main');
     }
 
     public function GetAnother(Request $request) {
-        return view('second', ['p1' => 'Called from Index controller; Method GetAnother', 'p2' => json_encode($request->Parameters())]);
+        return new View('second', ['p1' => 'Called from Index controller; Method GetAnother', 'p2' => json_encode($request->Parameters())]);
     }
 
 }

@@ -21,11 +21,13 @@ class Router {
             $this->routes = $_routesMock;
         }
         else {
-            //$router = $this;
-            $routes = require '../routes/web.php';
+            $router = $this;
+            require '../routes/web.php';
+            /*
             $this->routes = array_map(function ($item) {
                 return array_map([$this, 'UriTrim'], $item);
             }, $routes);
+            */
         }
     }
 
@@ -60,7 +62,11 @@ class Router {
         require "../app/Controllers/$controllerStr.php";
 
         $controller = new $controllerClassname();
-        return $controller->$controllerMethod($request);
+        if (!method_exists($controller, $controllerMethod)) {
+            throw new Exceptions\RouterException("Method $controllerMethod is not found in $controllerStr");
+        }
+        $result = $controller->$controllerMethod($request);
+        return $result;
     }
 
     private function UriTrim($uri) {
