@@ -14,10 +14,11 @@ class Request {
     private $uri;
     private $method;
     private $parameters;
+    private $accept = [];
 
     private function __construct($server, $pars) {
-        //$_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']
         $this->uri = trim(parse_url($server['REQUEST_URI'])['path'], '/\\');
+        $this->accept = array_map('trim', explode($server['HTTP_ACCEPT'], ','));
         $this->parameters = $pars;
         $this->method = $server['REQUEST_METHOD'];
     }
@@ -40,5 +41,9 @@ class Request {
 
     public function Method() {
         return $this->method;
+    }
+
+    public function IsAccepting($what) {
+        return \in_array($what, $this->accept, true);
     }
 }

@@ -30,9 +30,6 @@ class View implements RenderableResponseInterface {
     public function Render() {
         http_response_code($this->statuscode);
         extract($this->pars, EXTR_OVERWRITE);
-        //dd(scandir(".", SCANDIR_SORT_NONE));
         require "../public/views/{$this->viewFile}.view.php";
-        //return 0;
     }
-
 }

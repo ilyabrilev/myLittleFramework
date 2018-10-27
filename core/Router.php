@@ -10,6 +10,8 @@ namespace Core;
 
 require __DIR__ . '/Exceptions/RouterException.php';
 use Core\Exceptions\RouterException;
+use Core\Responses\ResponseHandler;
+use Core\Responses\View;
 
 class Router {
 
@@ -42,18 +44,18 @@ class Router {
         $uri = $this->UriTrim($request->Uri());
         $method = $request->Method();
         if (!array_key_exists($method, $this->routes)) {
-            throw new Exceptions\RouterException("Section $method is not found");
+            return ResponseHandler::Page404("Section $method is not found", $request);
         }
 
         if (!array_key_exists($uri, $this->routes[$method])) {
-            throw new Exceptions\RouterException("Route $uri is not found in $method section");
+            return ResponseHandler::Page404("Route $uri is not found in $method section", $request);
         }
 
         $action = $this->routes[$method][$uri];
 
         $actionArr = explode('@', $action);
         if (\count($actionArr) !== 2) {
-            throw new Exceptions\RouterException("Error in route $action");
+            return ResponseHandler::Page404("Error in route $action", $request);
         }
         $controllerStr = $actionArr[0];
         $controllerClassname = "app\\Controllers\\$controllerStr";
