@@ -46,4 +46,8 @@ class Request {
     public function IsAccepting($what) {
         return \in_array($what, $this->accept, true);
     }
+
+    public static function GetMockServerArray() {
+        return ['REQUEST_URI' => '', 'HTTP_ACCEPT' => 'test', 'REQUEST_METHOD' => 'GET'];
+    }
 }

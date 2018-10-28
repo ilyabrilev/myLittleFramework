@@ -14,14 +14,13 @@ use Core\Request;
 class ResponseHandler {
 
     public static function Render($result) {
-        if ($result instanceof RenderableResponseInterface) {
+        if ($result instanceof Response) {
             $result->Render();
         }
         else {
             (new Json($result))->Render();
         }
     }
-
 
     public static function Page404($text, Request $request) {
         if ($request->IsAccepting('application/json')) {

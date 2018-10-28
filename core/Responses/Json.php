@@ -9,9 +9,8 @@
 namespace Core\Responses;
 
 
-class Json implements RenderableResponseInterface {
+class Json extends Response {
 
-    private $statuscode = 200;
     private $data;
 
     public function __construct($data, int $statuscode = 200) {

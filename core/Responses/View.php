@@ -9,11 +9,10 @@
 namespace Core\Responses;
 
 
-class View implements RenderableResponseInterface {
+class View extends Response {
 
     private $viewFile = '';
     private $pars = [];
-    private $statuscode = 200;
 
     /**
      * View constructor.

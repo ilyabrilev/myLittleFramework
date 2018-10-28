@@ -19,17 +19,12 @@ class Router {
     private static $instance;
 
     public function __construct(array $_routesMock = null) {
-        if ($_routesMock) {
+        if (\is_array($_routesMock)) {
             $this->routes = $_routesMock;
         }
         else {
             $router = $this;
             require '../routes/web.php';
-            /*
-            $this->routes = array_map(function ($item) {
-                return array_map([$this, 'UriTrim'], $item);
-            }, $routes);
-            */
         }
     }
 
@@ -44,6 +39,7 @@ class Router {
         $uri = $this->UriTrim($request->Uri());
         $method = $request->Method();
         if (!array_key_exists($method, $this->routes)) {
+            //ToDo: change to 405 page
             return ResponseHandler::Page404("Section $method is not found", $request);
         }
 
@@ -58,14 +54,12 @@ class Router {
             return ResponseHandler::Page404("Error in route $action", $request);
         }
         $controllerStr = $actionArr[0];
-        $controllerClassname = "app\\Controllers\\$controllerStr";
+        $controllerClassname = "App\\Controllers\\$controllerStr";
         $controllerMethod = $actionArr[1];
-
-        require "../app/Controllers/$controllerStr.php";
 
         $controller = new $controllerClassname();
         if (!method_exists($controller, $controllerMethod)) {
-            throw new Exceptions\RouterException("Method $controllerMethod is not found in $controllerStr");
+            return ResponseHandler::Page404("Method $controllerMethod is not found in $controllerStr", $request);
         }
         $result = $controller->$controllerMethod($request);
         return $result;

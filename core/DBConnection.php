@@ -32,12 +32,8 @@ class DBConnection {
             throw new \Exception("Missing connection $confCon in database.php configuration");
         }
         $dbConf = $allDbConf[$confCon];
-        try {
-            $pdo = new \PDO("{$dbConf['host_type']}={$dbConf['host']};dbname={$dbConf['dbname']}", $dbConf['user'], $dbConf['pass']);
-        }
-        catch (\PDOException $e) {
-            jdd($e);
-        }
+
+        $pdo = new \PDO("{$dbConf['host_type']}={$dbConf['host']};dbname={$dbConf['dbname']}", $dbConf['user'], $dbConf['pass']);
         $obj = new self($pdo);
         self::$connections[$conn] = $obj;
         return $obj;
