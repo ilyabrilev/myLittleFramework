@@ -17,11 +17,14 @@ class Environment {
 
     /**
      * Environment constructor.
+     * @param string $fileContent
      * @throws Exceptions\EnvIsEmptyException
      * @throws Exceptions\EnvParseException
      */
-    public function __construct() {
-        $fileContent = file_get_contents(__DIR__ . '/../.env');
+    public function __construct($fileContent = null) {
+        if (!$fileContent) {
+            $fileContent = file_get_contents(__DIR__ . '/../.env');
+        }
         $rawLines = $this->MakeLines($fileContent);
         if (empty($rawLines)) {
             throw new Exceptions\EnvIsEmptyException();

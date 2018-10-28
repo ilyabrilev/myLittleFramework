@@ -71,6 +71,7 @@ class ComposerStaticInitc15fe8aa1f02dc66e13fb331030175a3
         'Core\\Environment' => __DIR__ . '/../..' . '/core/Environment.php',
         'Core\\ErrorHandler' => __DIR__ . '/../..' . '/core/ErrorHandler.php',
         'Core\\Exceptions\\ConfigurationException' => __DIR__ . '/../..' . '/core/Exceptions/ConfigurationException.php',
+        'Core\\Exceptions\\DBConnectionException' => __DIR__ . '/../..' . '/core/Exceptions/DBConnectionException.php',
         'Core\\Exceptions\\EnvIsEmptyException' => __DIR__ . '/../..' . '/core/Exceptions/EnvIsEmptyException.php',
         'Core\\Exceptions\\EnvParseException' => __DIR__ . '/../..' . '/core/Exceptions/EnvParseException.php',
         'Core\\Exceptions\\RouterException' => __DIR__ . '/../..' . '/core/Exceptions/RouterException.php',

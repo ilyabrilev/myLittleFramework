@@ -8,6 +8,8 @@
 
 namespace Core;
 
+use Core\Exceptions\DBConnectionException;
+
 class DBConnection {
 
     private static $connections = [];
@@ -18,18 +20,20 @@ class DBConnection {
         $this->pdo = $pdo;
     }
 
-    public static function GetInstance($conn = null) : self {
+    public static function GetInstance($conn = null, $allDbConf = null) : self {
         $confCon = $conn;
         if (!$conn) {
             $confCon = Environment::Get('DEFAULT_DB_CONNECTION', '', true);
         }
-        if (array_key_exists($conn, self::$connections)) {
-            return self::$connections[$conn];
+        if (array_key_exists($confCon, self::$connections)) {
+            return self::$connections[$confCon];
         }
-        $allDbConf = Configuration::getDB();
+        if (!$allDbConf) {
+            $allDbConf = Configuration::getDB();
+        }
         if (!array_key_exists($confCon, $allDbConf)) {
             //ToDo: unique Exception
-            throw new \Exception("Missing connection $confCon in database.php configuration");
+            throw new DBConnectionException("Missing connection $confCon in database.php configuration");
         }
         $dbConf = $allDbConf[$confCon];
 
@@ -47,5 +51,9 @@ class DBConnection {
     public function RawFetchClass($sql, $class) {
         $statement = $this->pdo->query($sql);
         return $statement->fetchAll(\PDO::FETCH_CLASS, $class);
+    }
+
+    public function GetIfPdoClassCreated() {
+        return $this->pdo instanceof \PDO;
     }
 }

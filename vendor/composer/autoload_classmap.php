@@ -11,6 +11,7 @@ return array(
     'Core\\Environment' => $baseDir . '/core/Environment.php',
     'Core\\ErrorHandler' => $baseDir . '/core/ErrorHandler.php',
     'Core\\Exceptions\\ConfigurationException' => $baseDir . '/core/Exceptions/ConfigurationException.php',
+    'Core\\Exceptions\\DBConnectionException' => $baseDir . '/core/Exceptions/DBConnectionException.php',
     'Core\\Exceptions\\EnvIsEmptyException' => $baseDir . '/core/Exceptions/EnvIsEmptyException.php',
     'Core\\Exceptions\\EnvParseException' => $baseDir . '/core/Exceptions/EnvParseException.php',
     'Core\\Exceptions\\RouterException' => $baseDir . '/core/Exceptions/RouterException.php',

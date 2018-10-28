@@ -8,7 +8,7 @@
 use PHPUnit\Framework\TestCase;
 use \Core\Router;
 
-final class RouterTests extends TestCase {
+final class RouterTest extends TestCase {
 
     public function test_index_get_success() {
         $router = new Router([]);
